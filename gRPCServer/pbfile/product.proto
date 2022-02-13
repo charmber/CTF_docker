@@ -1,0 +1,31 @@
+syntax="proto3";
+package gRPCServer;
+option go_package="../model";
+
+
+message CreatContainRequest{
+  string alias=1;
+  string images=2;
+  string port1=3;
+  string port2=4;
+  string SqlPort=5;
+}
+
+message CreatContainResponse{
+  bool State=1;
+}
+
+message StartContainRequest{
+  string containerID=1;
+}
+message StartContainResponse{
+  bool State=1;
+}
+
+
+service DockerServer{
+  //启动容器获取容器URL请求
+  rpc GetStartContainUrl(StartContainRequest) returns(StartContainResponse);
+  //创建容器并获得容器信息以及URL
+  rpc CreatContainMessage(CreatContainRequest) returns(CreatContainResponse);
+}
